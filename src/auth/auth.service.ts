@@ -49,8 +49,8 @@ export class AuthService {
         const isPasswordCorrect = await compare(dto.password, user.password)
         
         if(!isPasswordCorrect) throw new HttpException("User Unauthorized", HttpStatus.UNAUTHORIZED)
-        
-        const access_token = this.jwtService.sign(user, {
+        const {password, ...data} = user
+        const access_token = this.jwtService.sign(data, {
             expiresIn: '2d',
             secret: "access-token-secret",
         })
