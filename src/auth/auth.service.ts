@@ -29,10 +29,7 @@ export class AuthService {
             }
         })
         
-        const access_token = this.jwtService.sign(newUser, {
-            expiresIn: '2d',
-            secret: "access-token-secret",
-        })
+        const access_token = this.jwtService.sign(newUser)
         
         return access_token
     }
@@ -44,16 +41,13 @@ export class AuthService {
             }
         })
         
-        if(!user) throw new HttpException("User Unauthorized", HttpStatus.UNAUTHORIZED)
+        if(!user) throw new HttpException("User does not exist", HttpStatus.UNAUTHORIZED)
 
         const isPasswordCorrect = await compare(dto.password, user.password)
         
         if(!isPasswordCorrect) throw new HttpException("User Unauthorized", HttpStatus.UNAUTHORIZED)
         const {password, ...data} = user
-        const access_token = this.jwtService.sign(data, {
-            expiresIn: '2d',
-            secret: "access-token-secret",
-        })
+        const access_token = this.jwtService.sign(data)
         
         return access_token
     }

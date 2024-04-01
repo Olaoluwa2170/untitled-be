@@ -2,11 +2,14 @@ import { Injectable } from '@nestjs/common';
 import * as sharp from 'sharp';
 import * as bwipjs from 'bwip-js';
 import * as TextToSvg from 'text-to-svg';
-import { ConfigService } from "@nestjs/config"
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class TicketsService {
 
+    constructor(private prisma: PrismaService) {}
+
+    // UTILITIES
 
     generateSVG(text: string) {
     const textToSVG = TextToSvg.loadSync("./src/assets/Dancing_Script/DancingScript-Bold.ttf");
@@ -43,6 +46,17 @@ export class TicketsService {
         return Buffer.from(svg);
     }
 
+    // SERVICES
+
+    async getUserTickets(userId: number){
+        const tickets = await this.prisma.ticket.findMany({
+            where: {
+                userId
+            }
+        })
+        return tickets
+    }
+
     async createTicket(customerName: string, ticketId: string, outputPath: string) {
     
         const ticket = sharp(
@@ -58,9 +72,7 @@ export class TicketsService {
             const qrcodeImageBuffer = await this.generateQRCode(ticketId);
             const qrCodeOverlay = {
                 input: qrcodeImageBuffer,
-                // top: 210, // X position for QR code
                 top: 220, // X position for QR code
-                // left: 290, // Y position for QR code
                 left: 330, // Y position for QR code
             };
 

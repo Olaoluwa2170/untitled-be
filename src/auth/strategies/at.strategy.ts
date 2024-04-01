@@ -9,12 +9,11 @@ export class AtStrategy extends PassportStrategy(Strategy, "jwt") {
     constructor() {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: "access-token-secret",
+            secretOrKey: process.env.JWT_SECRET,
         })
     }
 
     validate(payload: any) {
-        console.log("AT strategy", payload)
         return payload
     }
 }

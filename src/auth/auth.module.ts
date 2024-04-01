@@ -8,10 +8,10 @@ import { JwtModule } from '@nestjs/jwt';
   imports: [
     PrismaModule,
     JwtModule.register({
-      // secret: "my-ticket-secret",
-      // signOptions: {
-      //   expiresIn: '1h'
-      // }
+      secret: process.env.JWT_SECRET,
+      signOptions: {
+        expiresIn: '2d'
+      }
     })
   ],  
   providers: [AuthService],

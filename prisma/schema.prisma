@@ -19,12 +19,40 @@ enum Role {
 }
 
 
+
 model User {
   id Int @id @default(autoincrement())
   username String @unique
   password String
   email String?
   role Role
+  hostedEvents Event[]
+  tickets Ticket[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Event {
+  id Int @id @default(autoincrement())
+  hostId Int
+  host User @relation(fields: [hostId], references: [id])
+  tickets Ticket[]
+  eventName String @unique
+  type String
+  location String
+  bgImage String
+  prices Json
+  date DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Ticket {
+  id Int @id @default(autoincrement())
+  eventId Int
+  event Event @relation(fields: [eventId], references: [id])
+  userId Int
+  user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
