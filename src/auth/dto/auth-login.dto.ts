@@ -1,17 +1,11 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsString } from "class-validator";
-
-enum Role {
-    HOST="HOST",
-    USER="USER"
-}
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class AuthLoginDto {
+  @IsString()
+  @IsNotEmpty()
+  username: string;
 
-    @IsString()
-    @IsNotEmpty()
-    username: string;
-
-    @IsString()
-    @IsNotEmpty()
-    password: string;
+  @IsString()
+  @IsNotEmpty()
+  password: string;
 }
