@@ -52,7 +52,6 @@ export class AuthService {
     if (!isPasswordCorrect)
       throw new HttpException('User Unauthorized', HttpStatus.UNAUTHORIZED);
     const { ...data } = user;
-    // const { password, ...data } = user;
     const access_token = this.jwtService.sign(data);
 
     return access_token;

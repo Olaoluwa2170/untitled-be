@@ -10,11 +10,11 @@ export class AuthController {
 
   @Public()
   @Post('/signup')
-  signup(
+  async signup(
     @Body() dto: AuthSignUpDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const accessToken = this.authService.signup(dto);
+    const accessToken = await this.authService.signup(dto);
 
     res.cookie('accessToken', accessToken, {
       httpOnly: true,
@@ -28,9 +28,21 @@ export class AuthController {
 
   @Public()
   @Post('/login')
-  login(@Body() dto: AuthLoginDto) {
-    return this.authService.login(dto);
+  async login(
+    @Body() dto: AuthLoginDto,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const accessToken = await this.authService.login(dto);
+
+    res.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 10000,
+      secure: true,
+      sameSite: 'none',
+    });
+    return accessToken;
   }
+
   @Post('/logout')
   logout() {
     return this.authService.logout();
