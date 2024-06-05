@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { config } from 'dotenv';
 import allowedOrigins from './config/allowedOrigin';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 async function bootstrap() {
   config();
@@ -13,6 +16,7 @@ async function bootstrap() {
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3100);
+  const PORT = process.env.PORT || 3000;
+  await app.listen(PORT);
 }
 bootstrap();
