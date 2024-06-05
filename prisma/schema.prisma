@@ -43,8 +43,8 @@ model Event {
   type String
   location String
   bgImage String
-  prices Json
-  date DateTime
+  prices Json[]
+  date DateTime[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
