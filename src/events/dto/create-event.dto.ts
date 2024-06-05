@@ -1,29 +1,32 @@
-import { IsDateString, IsJSON, IsNotEmpty, IsObject, IsString } from "class-validator"
+import {
+  //   IsDateString,
+  //   IsJSON,
+  IsNotEmpty,
+  IsObject,
+  IsString,
+} from 'class-validator';
 
 export class CreateEventDto {
+  @IsString()
+  @IsNotEmpty()
+  eventName: string;
 
-    @IsString()
-    @IsNotEmpty()
-    eventName: string
+  @IsString()
+  @IsNotEmpty()
+  type: string;
 
-    @IsString()
-    @IsNotEmpty()
-    type: string
+  @IsString()
+  @IsNotEmpty()
+  location: string;
 
-    @IsString()
-    @IsNotEmpty()
-    location: string
+  @IsString()
+  @IsNotEmpty()
+  bgImage: string;
 
-    @IsString()
-    @IsNotEmpty()
-    bgImage: string
+  @IsObject()
+  @IsNotEmpty()
+  prices: string;
 
-    @IsObject()
-    @IsNotEmpty()
-    prices: string
-    
-    @IsDateString()
-    @IsNotEmpty()
-    date: Date
-
+  @IsNotEmpty()
+  date: Date;
 }
