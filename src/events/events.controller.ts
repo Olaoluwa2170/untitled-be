@@ -1,17 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { EventsService } from './events.service';
-import { CreateEventDto } from './dto/create-event.dto';
-import { UpdateEventDto } from './dto/update-event.dto';
 import { Request } from 'express';
+import { Prisma } from '@prisma/client';
 
 @Controller('events')
 export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
   @Post()
-  create(@Req() req: Request, @Body() createEventDto: CreateEventDto) {
-    const userId = req.user["id"]
-    createEventDto.date = new Date(createEventDto.date)
+  create(@Req() req: Request, @Body() createEventDto: Prisma.EventCreateInput) {
+    const userId = req.user['id'];
     return this.eventsService.create(createEventDto, userId);
   }
 
@@ -26,9 +34,10 @@ export class EventsController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateEventDto: UpdateEventDto) {
-
-    if(updateEventDto.date) updateEventDto.date = new Date(updateEventDto.date)
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateEventDto: Prisma.EventUpdateInput,
+  ) {
     return this.eventsService.update(id, updateEventDto);
   }
 
