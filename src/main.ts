@@ -12,7 +12,7 @@ async function bootstrap() {
   config();
   const app = await NestFactory.create(AppModule);
   app.use((req: Request, res: Response, next: NextFunction) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://your-frontend.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
     res.setHeader(
       'Access-Control-Allow-Methods',
       'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE',
@@ -28,7 +28,7 @@ async function bootstrap() {
 
     next();
   });
-  app.enableCors();
+  // app.enableCors();
   // app.enableCors({
   //   origin: allowedOrigins,
   //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
