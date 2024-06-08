@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { config } from 'dotenv';
-import allowedOrigins from './config/allowedOrigin';
+// import allowedOrigins from './config/allowedOrigin';
 import * as dotenv from 'dotenv';
 // import { Response, Request, NextFunction } from 'express';
 
@@ -13,7 +13,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: allowedOrigins,
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'https://untitled-be.onrender.com',
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
     allowedHeaders: 'Content-Type, Accept',
