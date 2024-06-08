@@ -1,7 +1,6 @@
 const allowedOrigins = [
-  'http://localhost:3000',
   'http://localhost:5173',
-  'https://untitled-be.onrender.com',
+  'https://untitiled-fe.vercel.app',
 ];
 
 export default allowedOrigins;
