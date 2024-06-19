@@ -8,7 +8,7 @@ export class EventsService {
 
   async create(createEventDto: Prisma.EventCreateInput, hostId: number) {
     try {
-      const { eventName, date, location, type, prices, bgImage } =
+      const { eventName, date, location, type, prices, bgImage, ticketImage } =
         createEventDto;
       const event = await this.prisma.event.findUnique({
         where: {
@@ -26,6 +26,7 @@ export class EventsService {
           bgImage,
           date,
           location,
+          ticketImage,
           eventName,
           prices,
           type,
