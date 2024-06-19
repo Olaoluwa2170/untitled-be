@@ -8,8 +8,16 @@ export class EventsService {
 
   async create(createEventDto: Prisma.EventCreateInput, hostId: number) {
     try {
-      const { eventName, date, location, type, prices, bgImage, ticketImage } =
-        createEventDto;
+      const {
+        eventName,
+        date,
+        location,
+        type,
+        prices,
+        bgImage,
+        noTickets,
+        ticketImage,
+      } = createEventDto;
       const event = await this.prisma.event.findUnique({
         where: {
           eventName,
@@ -17,7 +25,7 @@ export class EventsService {
       });
 
       if (event)
-        throw new HttpException(
+        return new HttpException(
           'An event with this name already exists',
           HttpStatus.CONFLICT,
         );
@@ -30,6 +38,7 @@ export class EventsService {
           eventName,
           prices,
           type,
+          noTickets,
           hostId,
         },
       });

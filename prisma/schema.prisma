@@ -44,6 +44,7 @@ model Event {
   location String
   bgImage String
   ticketImage String
+  noTickets Int
   prices Json[]
   date DateTime[]
   createdAt DateTime @default(now())
