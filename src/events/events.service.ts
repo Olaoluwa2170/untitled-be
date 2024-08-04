@@ -42,7 +42,7 @@ export class EventsService {
           hostId,
         },
       });
-      return `Successfully added a new event ${newEvent.eventName}`;
+      return newEvent;
     } catch (error) {
       console.log(
         `Internal server Error ${error.message}`,
