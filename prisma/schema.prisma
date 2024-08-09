@@ -21,7 +21,6 @@ enum Role {
 }
 
 
-
 model User {
   id Int @id @default(autoincrement())
   username String @unique
@@ -41,12 +40,13 @@ model Event {
   tickets Ticket[]
   eventName String @unique
   type String
-  location String
+  location String?
   bgImage String
   ticketImage String
-  noTickets Int
+  noTickets Int?
   prices Json[]
   date DateTime[]
+  time String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -60,3 +60,4 @@ model Ticket {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
