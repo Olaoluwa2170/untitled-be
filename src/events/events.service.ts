@@ -71,6 +71,21 @@ export class EventsService {
     return event;
   }
 
+  async searchEvents(query: string) {
+    const events = await this.prisma.event.findMany({
+      where: {
+        eventName: {
+          contains: query,
+        },
+        location: {
+          contains: query,
+        },
+        type: { contains: query },
+      },
+    });
+    return events;
+  }
+
   async update(id: number, updateEventDto: Prisma.EventUpdateInput) {
     const event = await this.findOne(id);
 
