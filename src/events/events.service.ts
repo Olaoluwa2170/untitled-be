@@ -77,10 +77,6 @@ export class EventsService {
         eventName: {
           contains: query,
         },
-        location: {
-          contains: query,
-        },
-        type: { contains: query },
       },
     });
     return events;
