@@ -6,7 +6,7 @@ import { Prisma } from '@prisma/client';
 export class EventsService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createEventDto: Prisma.EventCreateInput, hostId: number) {
+  async create(createEventDto: Prisma.EventCreateInput, hostId: string) {
     try {
       const {
         eventName,
@@ -62,7 +62,7 @@ export class EventsService {
     return events;
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const event = await this.prisma.event.findUnique({
       where: {
         id,
@@ -71,7 +71,7 @@ export class EventsService {
     return event;
   }
 
-  async update(id: number, updateEventDto: Prisma.EventUpdateInput) {
+  async update(id: string, updateEventDto: Prisma.EventUpdateInput) {
     const event = await this.findOne(id);
 
     if (!event)
@@ -88,7 +88,7 @@ export class EventsService {
     return `This action updates a #${id} event`;
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const event = await this.prisma.event.delete({
       where: {
         id,

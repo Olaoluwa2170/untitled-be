@@ -49,7 +49,7 @@ export class TicketsService {
 
   // SERVICES
 
-  async getUserTickets(userId: number) {
+  async getUserTickets(userId: string) {
     const tickets = await this.prisma.ticket.findMany({
       where: {
         userId,
