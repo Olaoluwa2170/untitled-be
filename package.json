@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "install": "npm install --ignore-scripts && npm install --platform=linux --arch=x64 sharp --ignore-scripts && npx prisma generate",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -31,6 +32,8 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/passport": "^1.0.16",
     "@types/passport-jwt": "^4.0.1",
+    "@types/sharp": "^0.31.1",
+    "@types/text-to-svg": "^3.1.4",
     "bcryptjs": "^2.4.3",
     "bwip-js": "^4.3.2",
     "class-transformer": "^0.5.1",

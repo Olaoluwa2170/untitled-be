@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "Event" ADD COLUMN     "time" TEXT,
-ALTER COLUMN "location" DROP NOT NULL,
-ALTER COLUMN "noTickets" DROP NOT NULL;

@@ -11,7 +11,7 @@ generator client {
 
 // prisma/schema.prisma
 datasource db {
-  provider  = "postgresql"
+  provider  = "mongodb"
   url  	    = env("DATABASE_URL")
 }
 
@@ -22,7 +22,7 @@ enum Role {
 
 
 model User {
-  id Int @id @default(autoincrement())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   username String @unique
   password String
   email String?
@@ -34,8 +34,8 @@ model User {
 }
 
 model Event {
-  id Int @id @default(autoincrement())
-  hostId Int
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  hostId String @db.ObjectId
   host User @relation(fields: [hostId], references: [id])
   tickets Ticket[]
   eventName String @unique
@@ -52,10 +52,10 @@ model Event {
 }
 
 model Ticket {
-  id Int @id @default(autoincrement())
-  eventId Int
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  eventId String @db.ObjectId
   event Event @relation(fields: [eventId], references: [id])
-  userId Int
+  userId String @db.ObjectId
   user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
