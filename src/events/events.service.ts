@@ -58,7 +58,13 @@ export class EventsService {
   }
 
   async findAll() {
-    const events = await this.prisma.event.findMany();
+    const events = await this.prisma.event.findMany({
+      relationLoadStrategy: 'join', // or 'query'
+      include: {
+        tickets: true,
+        host: true,
+      },
+    });
     return events;
   }
 
