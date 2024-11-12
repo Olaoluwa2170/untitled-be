@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import * as sharp from 'sharp';
+import sharp from 'sharp';
 import * as bwipjs from 'bwip-js';
-import * as TextToSvg from 'text-to-svg';
+import { loadSync } from 'text-to-svg';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -11,14 +11,14 @@ export class TicketsService {
   // UTILITIES
 
   generateSVG(text: string) {
-    const textToSVG = TextToSvg.loadSync(
+    const textToSVG = loadSync(
       './src/assets/Dancing_Script/DancingScript-Bold.ttf',
     );
     try {
       const svg = textToSVG.getSVG(text, {
         fontSize: 110,
         anchor: 'top',
-        atrributes: { fill: 'white', stroke: 'black' },
+        attributes: { fill: 'white', stroke: 'black' },
       });
       return Buffer.from(svg);
     } catch (err) {
