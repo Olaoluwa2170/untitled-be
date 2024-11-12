@@ -26,7 +26,7 @@ export class EventsController {
 
   @Get()
   searchEvents(@Query('q') query: string) {
-    return this.eventsService.searchEvents(query);
+    // return this.eventsService.searchEvents(query);
   }
 
   @Get()
