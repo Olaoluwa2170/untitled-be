@@ -73,6 +73,9 @@ export class EventsService {
       where: {
         id,
       },
+      include: {
+        host: true,
+      },
     });
     return event;
   }
