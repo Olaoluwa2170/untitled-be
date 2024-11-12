@@ -8,6 +8,7 @@ import {
   Delete,
   Req,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { Request } from 'express';
@@ -21,6 +22,11 @@ export class EventsController {
   create(@Req() req: Request, @Body() createEventDto: Prisma.EventCreateInput) {
     const userId = req.user['id'];
     return this.eventsService.create(createEventDto, userId);
+  }
+
+  @Get()
+  searchEvents(@Query('q') query: string) {
+    return this.eventsService.searchEvents(query);
   }
 
   @Get()
