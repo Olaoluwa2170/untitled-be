@@ -8,7 +8,6 @@ export class TicketsController {
 
   @Get('')
   getUserTickets(@Req() req: Request) {
-    console.log(req.user);
     const userId = req.user['id'];
     return this.ticketsService.getUserTickets(userId);
   }

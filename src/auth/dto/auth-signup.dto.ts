@@ -2,7 +2,8 @@ import { IsEmail, IsEnum, IsNotEmpty, IsString } from "class-validator";
 
 enum Role {
     HOST="HOST",
-    USER="USER"
+    USER="USER",
+    ADMIN="ADMIN"
 }
 
 export class AuthSignUpDto {

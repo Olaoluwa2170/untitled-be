@@ -1,4 +1,5 @@
 import {
+  IsEnum,
   //   IsDateString,
   //   IsJSON,
   IsNotEmpty,
@@ -6,6 +7,10 @@ import {
   IsString,
 } from 'class-validator';
 
+export enum Status {
+  pending="pending",
+  active="active"
+}
 export class CreateEventDto {
   @IsString()
   @IsNotEmpty()
@@ -23,10 +28,44 @@ export class CreateEventDto {
   @IsNotEmpty()
   bgImage: string;
 
+  @IsEnum(Status)
+  status: Status
+
   @IsObject()
   @IsNotEmpty()
   prices: string;
 
   @IsNotEmpty()
+  date: Date;
+}
+export class EventFilterDto {
+  // @IsString()
+  // @IsNotEmpty()
+  name: string;
+
+  // @IsString()
+  // @IsNotEmpty()
+  type: string;
+
+  page: number;
+
+  size: number;
+
+  @IsEnum(Status)
+  status: Status;
+
+  // @IsString()
+  // @IsNotEmpty()
+  // location: string;
+
+  // @IsString()
+  // @IsNotEmpty()
+  // bgImage: string;
+
+  // @IsObject()
+  // @IsNotEmpty()
+  // prices: string;
+
+  // @IsNotEmpty()
   date: Date;
 }

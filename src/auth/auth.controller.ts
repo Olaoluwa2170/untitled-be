@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from './auth.service';
@@ -52,13 +52,14 @@ export class AuthController {
   async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     const cookies = req.cookies;
 
-    if (!cookies?.accessToken) return res.sendStatus(204);
+    // if (!cookies?.accessToken) return res.sendStatus(204);
+    if (!cookies?.accessToken) throw new HttpException("Not logged in", HttpStatus.UNAUTHORIZED)
 
     res.clearCookie('accessToken', {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
     });
-    return res.sendStatus(204);
+    // return res.sendStatus(204);
   }
 }
