@@ -13,6 +13,7 @@ import {
 import { EventsService } from './events.service';
 import { Request } from 'express';
 import { Prisma } from '@prisma/client';
+import { EventFilterDto } from './dto';
 
 @Controller('events')
 export class EventsController {
@@ -24,31 +25,32 @@ export class EventsController {
     return this.eventsService.create(createEventDto, userId);
   }
 
-  @Get()
-  searchEvents(@Query('q') query: string) {
-    return this.eventsService.searchEvents(query);
-  }
 
   @Get()
-  findAll() {
-    return this.eventsService.findAll();
+  findAll(@Query() query: EventFilterDto) {
+    return this.eventsService.findAll(query);
+  }
+
+  @Get('creator/:id')
+  findAllByCreator(@Param('id') id: string, @Query() query: EventFilterDto) {
+    return this.eventsService.findAllByCreator(id, query);
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: string) {
+  findOne(@Param('id') id: string) {
     return this.eventsService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id', ParseIntPipe) id: string,
+    @Param('id') id: string,
     @Body() updateEventDto: Prisma.EventUpdateInput,
   ) {
     return this.eventsService.update(id, updateEventDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: string) {
+  remove(@Param('id') id: string) {
     return this.eventsService.remove(id);
   }
 }

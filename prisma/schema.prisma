@@ -18,6 +18,12 @@ datasource db {
 enum Role {
   HOST
   USER
+  ADMIN
+}
+
+enum Status {
+  pending
+  active
 }
 
 
@@ -26,7 +32,7 @@ model User {
   username String @unique
   password String
   email String?
-  role Role
+  role Role @default(USER)
   hostedEvents Event[]
   tickets Ticket[]
   createdAt DateTime @default(now())
@@ -46,6 +52,7 @@ model Event {
   noTickets Int?
   prices Json[]
   date DateTime[]
+  status Status @default(pending)
   time String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -61,3 +68,12 @@ model Ticket {
   updatedAt DateTime @updatedAt
 }
 
+
+
+model Token {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+  expiresAt DateTime 
+
+  @@unique([id, email])
+}

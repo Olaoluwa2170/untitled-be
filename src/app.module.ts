@@ -7,9 +7,10 @@ import { TicketsModule } from './tickets/tickets.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './auth/guards/at.guard';
 import { EventsModule } from './events/events.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
-  imports: [AuthModule, PrismaModule, TicketsModule, EventsModule],
+  imports: [AuthModule, PrismaModule, TicketsModule, EventsModule, AdminModule],
   controllers: [AppController],
   providers: [
     {
