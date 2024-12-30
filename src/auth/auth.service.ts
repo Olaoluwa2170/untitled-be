@@ -27,7 +27,8 @@ export class AuthService {
       data: {
         username: dto.username,
         password: hashedPassword,
-        email: dto.email
+        email: dto.email,
+        role: 'USER' // or any default role you want to assign
       },
     });
 
