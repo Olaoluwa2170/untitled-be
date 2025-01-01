@@ -38,21 +38,50 @@ export class CreateEventDto {
   @IsNotEmpty()
   date: Date;
 }
+export class CreateEventRestructureDto {
+  @IsString()
+  @IsNotEmpty()
+  eventName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  type: string;
+
+  @IsString()
+  @IsNotEmpty()
+  location: {
+    landmark: string, venue: string, state: string
+  };
+
+  @IsString()
+  @IsNotEmpty()
+  bgImage: string;
+
+  @IsEnum(Status)
+  status: Status
+
+  @IsObject()
+  @IsNotEmpty()
+  prices: string;
+
+  @IsNotEmpty()
+  date: Date;
+}
 export class EventFilterDto {
   // @IsString()
   // @IsNotEmpty()
-  name: string;
+  name?: string;
 
   // @IsString()
   // @IsNotEmpty()
-  type: string;
+  type?: string;
 
-  page: number;
+  page?: number;
 
-  size: number;
+  size?: number;
 
   @IsEnum(Status)
-  status: Status;
+  status?: Status;
 
   // @IsString()
   // @IsNotEmpty()
