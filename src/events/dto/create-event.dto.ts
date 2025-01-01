@@ -80,7 +80,7 @@ export class EventFilterDto {
 
   size?: number;
 
-  @IsEnum(Status)
+  // @IsEnum(Status)
   status?: Status;
 
   // @IsString()
