@@ -4,6 +4,7 @@ import {
   //   IsJSON,
   IsNotEmpty,
   IsObject,
+  IsOptional,
   IsString,
 } from 'class-validator';
 
@@ -80,7 +81,8 @@ export class EventFilterDto {
 
   size?: number;
 
-  // @IsEnum(Status)
+  @IsEnum(Status)
+  @IsOptional()
   status?: Status;
 
   // @IsString()
