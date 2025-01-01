@@ -41,6 +41,15 @@ export class EventsController {
     return this.eventsService.findOne(id);
   }
 
+   @Patch(':id/tickets')
+  updateTickets(
+    @Param('id') id: string,
+    @Body('number', ParseIntPipe) number: number,
+  ) {
+    return this.eventsService.updateTickets(id, number);
+  }
+
+
   @Patch(':id')
   update(
     @Param('id') id: string,

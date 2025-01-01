@@ -105,6 +105,26 @@ export class EventsService {
     return events;
   }
 
+  async updateTickets(id: string, number: number) {
+    const event = await this.prisma.event.findUnique({
+      where: { id },
+    });
+
+    if (!event) {
+      throw new HttpException('Event does not exist', HttpStatus.NOT_FOUND);
+    }
+
+    const updatedEvent = await this.prisma.event.update({
+      where: { id },
+      data: {
+        noTickets: event.noTickets - number,
+      },
+    });
+
+    return updatedEvent;
+  }
+
+
   async findAllByCreator(id: string, query: EventFilterDto) {
 
     if(id.length !== 24) throw new HttpException("User does not exist", HttpStatus.UNAUTHORIZED)
